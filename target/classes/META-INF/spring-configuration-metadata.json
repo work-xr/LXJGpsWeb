@@ -1,0 +1,83 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps",
+      "type": "com.sky.xljgps.property.GpsProperty"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.PersonProperty",
+      "name": "xljgps",
+      "type": "com.sky.xljgps.property.PersonProperty"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.sky.xljgps.property.PersonProperty",
+      "defaultValue": 0,
+      "name": "xljgps.age",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.company",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.data",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.imei",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.latitude",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.loc-type",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.longitude",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.PersonProperty",
+      "name": "xljgps.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.position-type",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.power",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.sign",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.time",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps.type",
+      "type": "java.lang.String"
+    }
+  ]
+}
