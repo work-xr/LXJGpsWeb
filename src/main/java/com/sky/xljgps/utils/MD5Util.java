@@ -2,6 +2,13 @@ package com.sky.xljgps.utils;
 
 import java.security.MessageDigest;
 
+
+/**
+ * description:
+ * author:  hefeng
+ * create:  2018-07-11  下午1:35
+ */
+
 public class MD5Util {
 
     public final static String  encrypt(String plaintext) {

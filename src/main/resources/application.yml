@@ -11,3 +11,14 @@ spring:
       ddl-auto: update
     show-sql: true
 
+# http://192.168.100.62:8081/api/test/manage
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      base-path:
+  server:
+    port: 8081
+  endpoint:
+    health:
+      show-details: always

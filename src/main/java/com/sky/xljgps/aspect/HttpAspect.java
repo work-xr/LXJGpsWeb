@@ -10,6 +10,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+
+/**
+ *  description:
+ *  暂时只用于监视controller的执行
+ *  author:  hefeng
+ *  create:  18-7-11 下午7:57
+ */
+
 @Aspect
 @Component
 public class HttpAspect {
@@ -19,7 +27,7 @@ public class HttpAspect {
     @Pointcut("execution(public * com.sky.xljgps.controller.PersonController.*(..))")
     public void log()
     {
-        logger.info("start..........");     // will not pring
+        logger.info("start..........");     // will not print
     }
 
     @Before("log()")

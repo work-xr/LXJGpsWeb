@@ -7,7 +7,11 @@ import com.sky.xljgps.msg.ResultMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import static com.sky.xljgps.utils.Constant.SIGN_SECRET_CODE;
+import static com.sky.xljgps.utils.Constant.URL_DATA_DECODE_TYPE;
 
 /**
  * description:
@@ -41,5 +45,32 @@ public class VerifySignUtil {
         }
 
         return ResultUtil.success();
+    }
+
+
+    /***
+     *  description:
+     *  解码从客户端收到的参数
+     *  author:  hefeng
+     *  create:  18-7-11 下午12:26
+     *  params:
+     *  return:  java.lang.String
+     */
+    public static String getDecodedString(String encodedString) {
+        String decodedString = null;
+
+        if (encodedString == null)
+        {
+            throw new GpsException(ResultEnum.PARAM_EMPTY);
+        }
+        try {
+            decodedString = URLDecoder.decode(encodedString, URL_DATA_DECODE_TYPE);
+            logger.info("getDecodedString ..........data_size={}", decodedString.length());
+            logger.info("getDecodedString ..........decodedString={}", decodedString);
+        } catch (UnsupportedEncodingException e) {
+            throw new GpsException(ResultEnum.DECODE_ERROR);
+        }
+
+        return decodedString;
     }
 }

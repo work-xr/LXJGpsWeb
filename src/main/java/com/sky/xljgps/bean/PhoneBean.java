@@ -4,7 +4,6 @@ package com.sky.xljgps.bean;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 @Entity
 public class PhoneBean {
@@ -18,10 +17,6 @@ public class PhoneBean {
     private String company;
     private String type;
     private String time;
-    @Transient              // 该字段不写入数据库
-    private String data;
-    @Transient              // 该字段不写入数据库
-    private String sign;
 
     private String sos_phone; // phone list
     private String name;
@@ -39,8 +34,6 @@ public class PhoneBean {
                 ", company='" + company + '\'' +
                 ", type='" + type + '\'' +
                 ", time='" + time + '\'' +
-                ", data='" + data + '\'' +
-                ", sign='" + sign + '\'' +
                 ", sos_phone='" + sos_phone + '\'' +
                 ", name='" + name + '\'' +
                 '}';
@@ -100,22 +93,6 @@ public class PhoneBean {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
     }
 
     public String getSosPhone() {

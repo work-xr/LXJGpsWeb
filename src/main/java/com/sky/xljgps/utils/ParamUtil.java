@@ -14,17 +14,19 @@ import static com.sky.xljgps.utils.Constant.URL_DATA_DECODE_TYPE;
 
 /***
 *  description:
-*  参数解析
+*  参数解析(已废弃,使用gson进行参数解析)
 *  author:  hefeng
 *  create:  18-7-11 下午12:30
 */
+
+@Deprecated
 public class ParamUtil {
     private static final Logger logger = LoggerFactory.getLogger(VerifySignUtil.class);
     private static int  sParamPosition = 0;
 
     /***
     *  description:
-    *  把客户端发送过来的参数信息进行解析,以key-value的形式返回
+    *  把客户端发送过来的参数信息进行解析,把参数名和值以key-value的形式返回
     *  author:  hefeng
     *  create:  18-7-11 下午12:30
     *  params:   * @param params
@@ -69,31 +71,5 @@ public class ParamUtil {
     public static void resetParamPosition()
     {
         sParamPosition = 0;
-    }
-
-    /***
-     *  description:
-     *  解码从客户端收到的参数
-     *  author:  hefeng
-     *  create:  18-7-11 下午12:26
-     *  params:
-     *  return:  java.lang.String
-     */
-    public static String getDecodedString(String encodedString) {
-        String decodedString = null;
-
-        if (encodedString == null)
-        {
-            throw new GpsException(ResultEnum.PARAM_EMPTY);
-        }
-        try {
-            decodedString = URLDecoder.decode(encodedString, URL_DATA_DECODE_TYPE);
-            logger.info("getDecodedString ..........data_size={}", decodedString.length());
-            logger.info("getDecodedString ..........decodedString={}", decodedString);
-        } catch (UnsupportedEncodingException e) {
-            throw new GpsException(ResultEnum.DECODE_ERROR);
-        }
-
-        return decodedString;
     }
 }

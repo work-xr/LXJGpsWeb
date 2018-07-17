@@ -1,5 +1,12 @@
 package com.sky.xljgps.msg;
 
+
+/**
+ * description:
+ * author:  hefeng
+ * create:  2018-07-11  下午1:35
+ */
+
 public class ResultMsg<T> {
     protected int code;
     protected String message;

@@ -2,14 +2,14 @@
   "hints": [],
   "groups": [
     {
-      "sourceType": "com.sky.xljgps.property.GpsProperty",
-      "name": "xljgps",
-      "type": "com.sky.xljgps.property.GpsProperty"
-    },
-    {
       "sourceType": "com.sky.xljgps.property.PersonProperty",
       "name": "xljgps",
       "type": "com.sky.xljgps.property.PersonProperty"
+    },
+    {
+      "sourceType": "com.sky.xljgps.property.GpsProperty",
+      "name": "xljgps",
+      "type": "com.sky.xljgps.property.GpsProperty"
     }
   ],
   "properties": [

@@ -1,5 +1,7 @@
 package com.sky.xljgps.service;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sky.xljgps.bean.BaseBean;
 import com.sky.xljgps.bean.GpsBean;
 import com.sky.xljgps.enums.ResultEnum;
@@ -20,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.sky.xljgps.utils.Constant.*;
 
@@ -65,8 +68,10 @@ public class GpsService {
         logger.info("saveGpsInfo start..........baseBean={}", baseBean);
 
         VerifySignUtil.vertificationSign(baseBean);
+        String gsonString = VerifySignUtil.getDecodedString(baseBean.getData());
 
-        GpsBean gpsBean = convertToGson(ParamUtil.getDecodedString(baseBean.getData()));
+        GpsBean gpsBean = convertToGson2(gsonString);
+
         gpsBean.setManufactory(gpsBean.getManufactory());
         gpsBean.setModel(gpsBean.getModel());
         gpsBean.setImei(gpsBean.getImei());
@@ -82,15 +87,98 @@ public class GpsService {
         return ResultUtil.success(gpsRepository.save(gpsBean));
     }
 
+    /**
+    *  description:
+    *  把客户端发送过来的GPS信息,转换为GSON格式
+    *  author:  hefeng
+    *  create:  18-7-13 下午2:32
+    *  params:   * @param gsonString
+    *  return:  com.sky.xljgps.bean.GpsBean
+    */
+    private GpsBean convertToGson2(String gsonString)
+    {
+        GpsBean gpsBean = new GpsBean();
+        int length = 0;
+
+        if (gsonString == null || gsonString.length() == 0)
+        {
+            return null;
+        }
+
+        Gson gson = new Gson();
+        Map<String, String> retMap = gson.fromJson(gsonString, new TypeToken<Map<String, String>>(){}.getType());
+
+        logger.info("convertToGson2.......... length = {}", retMap.entrySet().size());
+
+        for (Map.Entry<String, String> entry : retMap.entrySet())
+        {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            //logger.info("key = {}", key);
+            //logger.info("value = {}", value);
+
+            if (key.contains(PARAM_LOC_TYPE))
+            {
+                gpsBean.setLoc_type(value);
+            }
+            else if (key.contains(PARAM_POSITION_TYPE))
+            {
+                gpsBean.setPosition_type(value);
+            }
+            else if (key.contains(PARAM_MANUFACTORY))
+            {
+                gpsBean.setManufactory(value);
+            }
+            else if (key.contains(PARAM_MODEL))
+            {
+                gpsBean.setModel(value);
+            }
+            else if (key.contains(PARAM_IMEI))
+            {
+                gpsBean.setImei(value);
+            }
+            else if (key.contains(PARAM_COMPANY))
+            {
+                gpsBean.setCompany(value);
+            }
+            else if (key.contains(PARAM_TIME))
+            {
+                gpsBean.setTime(value);
+            }
+            else if (key.contains(PARAM_TYPE))
+            {
+                gpsBean.setType(value);
+            }
+            else if (key.contains(PARAM_POWER))
+            {
+                gpsBean.setPower(value);
+            }
+            else if (key.contains(PARAM_LATITUDE))
+            {
+                gpsBean.setLatitude(value);
+            }
+            else if (key.contains(PARAM_LONGITUDE))
+            {
+                gpsBean.setLongitude(value);
+            }
+            else
+            {
+                throw new GpsException(ResultEnum.PARAM_ERROR);
+            }
+        }
+
+        return gpsBean;
+    }
 
     /***
     *  description:
-    *  把客户端发送过来的GPS信息,转换为GSON格式
+    *  把客户端发送过来的GPS信息,转换为GSON格式(已废弃,使用gson进行参数解析)
     *  author:  hefeng
     *  create:  18-7-11 上午11:37
     *  params:  * @param data
     *  return:  com.sky.xljgps.bean.GpsBean
     */
+    @Deprecated
     private GpsBean convertToGson(String data)
     {
         GpsBean gpsBean = new GpsBean();
@@ -101,6 +189,7 @@ public class GpsService {
         {
             return null;
         }
+
 
         data = data.substring(1);  // delete {
         String[] strSplits = data.split(":");
@@ -114,6 +203,16 @@ public class GpsService {
             String key = hashMap.keySet().toString();                       //  [company]
 
             logger.info("convertToGson.......... hashMap.key = {}", key);
+
+            if (key.contains(PARAM_LOC_TYPE))
+            {
+                gpsBean.setLoc_type(hashMap.get(PARAM_LOC_TYPE));
+            }
+
+            if (key.contains(PARAM_POSITION_TYPE))
+            {
+                gpsBean.setPosition_type(hashMap.get(PARAM_POSITION_TYPE));
+            }
 
             if (key.contains(PARAM_MANUFACTORY))
             {
@@ -147,19 +246,15 @@ public class GpsService {
             {
                 gpsBean.setLatitude(hashMap.get(PARAM_LATITUDE));
             }
-
+            else if (key.contains(PARAM_LONGITUDE))
+            {
+                gpsBean.setLongitude(hashMap.get(PARAM_LONGITUDE));
+            }
             else if (key.contains(PARAM_LOC_TYPE))
             {
                 logger.info("convertToGson loc_type = {}", hashMap.get(PARAM_LOC_TYPE));
                 gpsBean.setLoc_type(hashMap.get(PARAM_LOC_TYPE));
             }
-
-            else if (key.contains(PARAM_LONGITUDE))
-            {
-                logger.info("convertToGson longitude = {}", hashMap.get(PARAM_LONGITUDE));
-                gpsBean.setLongitude(hashMap.get(PARAM_LONGITUDE));
-            }
-
             else if (key.contains(PARAM_POSITION_TYPE))
             {
                 logger.info("convertToGson position_type = {}", hashMap.get(PARAM_POSITION_TYPE));

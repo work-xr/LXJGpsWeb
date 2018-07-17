@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+/**
+ * description: 自定义的ExceptionHandle
+ * author:  hefeng
+ * create:  2018-07-11  下午1:35
+ */
+
 @ControllerAdvice
 public class ExceptionHandle {
 
